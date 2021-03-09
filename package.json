@@ -10,6 +10,7 @@
   },
   "scripts": {
     "prepublish": "tsc",
+    "install": "tsc",
     "prettier": "prettier --fix"
   },
   "devDependencies": {
