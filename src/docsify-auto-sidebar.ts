@@ -23,7 +23,8 @@ function buildTree(dirPath: string, name = '', dirLink = ''): Entry {
   let children: Entry[] = [];
   for (let fileName of fs.readdirSync(dirPath)) {
     if (ignores.test(fileName)) continue;
-
+    if(fileName[0] =='_')
+      continue;
     let fileLink = dirLink + '/' + fileName;
     let filePath = path.join(dirPath, fileName);
     if (fs.statSync(filePath).isDirectory()) {
@@ -72,6 +73,10 @@ let args = yargs
       alias: 'd',
       type: 'string',
       describe: 'Where to look for the documentation (defaults to docs subdir of repo directory)'
+    },useFooter: {
+      alias: 'f',
+      type: 'string',
+      describe: 'If enabled, this will enable the use of sidebar footer'
     }
   }).argv;
 
@@ -79,7 +84,11 @@ let dir = path.resolve(process.cwd(), args.docsDir || './docs');
 
 try {
   let root = buildTree(dir);
-  fs.writeFileSync(path.join(dir, '_sidebar.md'), renderToMd(root));
+  let md = renderToMd(root);
+  if(args.useFooter != null && args.useFooter != undefined) {
+      md += "\n<footer id=\"mb-footer\"></footer>";
+  }
+  fs.writeFileSync(path.join(dir, '_sidebar.md'), md);
 } catch (e) {
   console.error('Unable to generate sidebar for directory', dir);
   console.error('Reason:', e.message);

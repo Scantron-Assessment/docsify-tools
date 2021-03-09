@@ -11,7 +11,7 @@ Quickly document your (typescript or otherwise) projects!
 
 Usage:
 
-    docsify-init [-r repoDir] [-d docsDir]
+    docsify-init [-r repoDir] [-d docsDir] [-f useFooter]
 
 Initializes docsify in the specified repo and docs sub-directory. By default, the repo is the
 current directory and the subdirectory is "docs".
@@ -29,6 +29,10 @@ control the ordering, the number and dash will not appear in the sidebar text. F
 
     1-Guides
     2-API
+
+Ignores files that start with and underscore `_`
+
+`-f` will add in the required footer html to support sidebar footer [https://github.com/markbattistella/docsify-sidebarFooter](https://github.com/markbattistella/docsify-sidebarFooter)
 
 will result with "Guides" and "API" items in the sidebar.
 
