@@ -10,7 +10,7 @@
   },
   "scripts": {
     "prepublish": "tsc",
-    "install": "tsc",
+    "install": "yan install; tsc",
     "prettier": "prettier --fix"
   },
   "devDependencies": {
